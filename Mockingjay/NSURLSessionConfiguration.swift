@@ -23,13 +23,21 @@ extension NSURLSessionConfiguration {
 
   class func mockingjayDefaultSessionConfiguration() -> NSURLSessionConfiguration {
     let configuration = mockingjayDefaultSessionConfiguration()
-    configuration.protocolClasses = [MockingjayProtocol.self] as [AnyClass]  + configuration.protocolClasses!
+    let extantClasses: NSArray = configuration.protocolClasses!
+    let arr = NSMutableArray(array: extantClasses)
+    arr.addObject(MockingjayProtocol.self as AnyClass)
+    let arr2 = arr as AnyObject as! [AnyClass]
+    configuration.protocolClasses = arr2
     return configuration
   }
-
+  
   class func mockingjayEphemeralSessionConfiguration() -> NSURLSessionConfiguration {
     let configuration = mockingjayEphemeralSessionConfiguration()
-    configuration.protocolClasses = [MockingjayProtocol.self] as [AnyClass] + configuration.protocolClasses!
+    let extantClasses: NSArray = configuration.protocolClasses!
+    let arr = NSMutableArray(array: extantClasses)
+    arr.addObject(MockingjayProtocol.self as AnyClass)
+    let arr2 = arr as AnyObject as! [AnyClass]
+    configuration.protocolClasses = arr2
     return configuration
   }
 }
